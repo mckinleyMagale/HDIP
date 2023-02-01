@@ -10,8 +10,8 @@ package com.tutor.queues;
  * @author mckin
  */
 public class node {
-    int element;
-    node next;
+    private int element;
+    private node next;
     
     public node(int e)
     {
@@ -31,11 +31,11 @@ public class node {
     
     public void setElement(int newElement)
     {
-        element = newElement;
+        this.element = newElement;
     }
     
     public void setNext(node newNext)
     {
-        next = newNext;
+        this.next = newNext;
     }
 }

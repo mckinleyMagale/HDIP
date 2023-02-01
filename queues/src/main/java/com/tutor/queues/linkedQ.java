@@ -32,7 +32,12 @@ public class linkedQ {
     
     public boolean isEmpty()
     {
-        return (qSize == 0);
+        boolean resp = false;
+        if(qSize == 0)
+        {
+            resp = true;
+        }
+        return resp;
     }
     
     public int front()
@@ -49,33 +54,41 @@ public class linkedQ {
         node newNode = new node(object);
         
         //if Queue is empty, then new node is front and rear
-        if(tail == null)
+        if(head == null)
         {
             head = tail = newNode;
+            qSize++;
+        }
+        else
+        {
+            tail.setNext(newNode);
+            tail = newNode;
+            qSize++;
         }
         
-        tail.next = newNode;
-        tail = newNode;
-        qSize++;
     }
     
-    public void serve()
+    public node serve()
     {
-        //If queue is empty, state it
-        if(isEmpty())
-        {
-            System.out.println("Queue is empty");
-        }
+        node resp = null;
         
-        //Store previous head and move head pointer one node ahead
-        node tempNode = head;
-        head = head.next;
-        
-        //if head becomes null, change tail pointer as null
-        if(isEmpty())
+        if(head != null)
         {
-            tail = null;
+            if(head.getNext() != null)
+            {
+                resp = new node(head.getElement());
+                head = head.getNext();
+                qSize--;
+            }
+            else
+            {
+                resp = new node(head.getElement());
+                head = null;
+                tail = null;
+                qSize--;
+            }   
         }
+       return resp;
     }
     
     public void display()
@@ -89,9 +102,9 @@ public class linkedQ {
             node temp = head;
             while(temp != null)
             {
-                System.out.print(temp.element);
+                System.out.print(temp.getElement());
                 
-                temp = temp.next;
+                temp = temp.getNext();
                 if(temp!=null)
                     System.out.print(",");
             }
